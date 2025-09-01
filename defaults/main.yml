@@ -1,0 +1,11 @@
+---
+redis_local_conf_file: ./redis/redis.conf
+
+redis_maxmemory: 200MB
+redis_bind: "0.0.0.0"
+redis_password:
+redis_appendonly: false
+
+redis_uninstall: false
+redis_autoremove: true
+redis_purge: true

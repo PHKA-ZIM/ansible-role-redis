@@ -1,0 +1,9 @@
+---
+- name: Ensure that packages are uninstalled
+  become: true
+  ansible.builtin.apt:
+    name: "{{ item }}"
+    autoremove: "{{ redis_autoremove }}"
+    purge: "{{ redis_purge }}"
+    state: absent
+  loop: "{{ redis_packages }}"

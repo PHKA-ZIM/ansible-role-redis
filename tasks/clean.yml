@@ -1,0 +1,6 @@
+---
+- name: Stop redis service
+  become: true
+  ansible.builtin.service:
+    name: redis-server
+    state: stopped

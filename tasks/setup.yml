@@ -1,0 +1,28 @@
+---
+- name: Copy redis config file
+  become: true
+  ansible.builtin.copy:
+    src: "{{ item }}"
+    dest: "{{ redis_path }}/redis.conf"
+    mode: "{{ redis_file_mode }}"
+    force: true
+  with_first_found:
+    - files:
+        - "{{ redis_local_conf_file }}"
+      skip: true
+  notify:
+    - restart redis-server
+
+- name: Copy redis config template file
+  become: true
+  ansible.builtin.template:
+    src: "{{ item }}"
+    dest: "{{ redis_path }}/redis.conf"
+    mode: "{{ redis_file_mode }}"
+    force: true
+  with_first_found:
+    - files:
+        - "{{ redis_local_conf_file }}.j2"
+      skip: true
+  notify:
+    - restart redis-server

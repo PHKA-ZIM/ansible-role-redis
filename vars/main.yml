@@ -1,0 +1,8 @@
+---
+redis_path: /etc/redis/
+
+redis_packages:
+  - redis-server
+  - redis-tools
+
+redis_file_mode: "0644"
