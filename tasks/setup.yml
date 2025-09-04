@@ -1,9 +1,26 @@
 ---
+- name: Endsure local.conf exists
+  become: true
+  ansible-builtin.file:
+    path: "{{ redis_path }}/local.conf"
+    state: touch
+    mode: "{{ redis_file_mode }}"
+    owner : redis
+    group: redis
+
+- name: Ensure local.conf is included
+  become: true
+  ansible.builtin.line:
+    path: "{{ redis_path }}/redis.conf"
+    insertafter: EOF
+    search_string: "include {{ redis_path }}/local.conf"
+    lineinfile: "include {{ redis_path }}/local.conf"
+
 - name: Copy redis config file
   become: true
   ansible.builtin.copy:
     src: "{{ item }}"
-    dest: "{{ redis_path }}/redis.conf"
+    dest: "{{ redis_path }}/local.conf"
     mode: "{{ redis_file_mode }}"
     owner : redis
     group: redis
@@ -19,7 +36,7 @@
   become: true
   ansible.builtin.template:
     src: "{{ item }}"
-    dest: "{{ redis_path }}/redis.conf"
+    dest: "{{ redis_path }}/local.conf"
     mode: "{{ redis_file_mode }}"
     owner : redis
     group: redis
