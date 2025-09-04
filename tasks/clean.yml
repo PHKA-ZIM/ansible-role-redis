@@ -4,3 +4,9 @@
   ansible.builtin.service:
     name: redis-server
     state: stopped
+
+- name: Ensure local.conf is removed
+  become: true
+  ansible.builtin.file:
+    path: "{{ redis_path }}"
+    state: absent

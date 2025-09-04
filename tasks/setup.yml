@@ -1,7 +1,7 @@
 ---
-- name: Endsure local.conf exists
+- name: Ensure local.conf exists
   become: true
-  ansible-builtin.file:
+  ansible.builtin.file:
     path: "{{ redis_path }}/local.conf"
     state: touch
     mode: "{{ redis_file_mode }}"
