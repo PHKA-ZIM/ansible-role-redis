@@ -5,6 +5,8 @@
     src: "{{ item }}"
     dest: "{{ redis_path }}/redis.conf"
     mode: "{{ redis_file_mode }}"
+    owner : redis
+    group: redis
     force: true
   with_first_found:
     - files:
@@ -19,6 +21,8 @@
     src: "{{ item }}"
     dest: "{{ redis_path }}/redis.conf"
     mode: "{{ redis_file_mode }}"
+    owner : redis
+    group: redis
     force: true
   with_first_found:
     - files:
