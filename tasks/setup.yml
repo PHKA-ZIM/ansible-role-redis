@@ -14,7 +14,7 @@
     path: "{{ redis_path }}/redis.conf"
     insertafter: EOF
     search_string: "include {{ redis_path }}/local.conf"
-    lineinfile: "include {{ redis_path }}/local.conf"
+    line: "include {{ redis_path }}/local.conf"
 
 - name: Copy redis config file
   become: true
