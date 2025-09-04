@@ -5,4 +5,4 @@ redis_packages:
   - redis-server
   - redis-tools
 
-redis_file_mode: "0644"
+redis_file_mode: "640"
