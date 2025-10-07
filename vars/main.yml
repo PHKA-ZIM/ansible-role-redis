@@ -1,4 +1,12 @@
 ---
+rediskey_url: https://packages.redis.io/gpg
+rediskey_path: /etc/apt/keyrings/
+rediskey_name: redis-archive-keyring.asc
+
+redisrepositories:
+  - deb [signed-by={{ rediskey_path }}{{ rediskey_name }}] https://packages.redis.io/deb {{ ansible_distribution_release }} main 
+  - deb-src  [signed-by={{ rediskey_path }}{{ rediskey_name }}] https://packages.redis.io/deb {{ ansible_distribution_release }} main 
+
 redis_path: /etc/redis/
 
 redis_packages:

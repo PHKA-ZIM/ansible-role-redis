@@ -7,3 +7,19 @@
     purge: "{{ redis_purge }}"
     state: absent
   loop: "{{ redis_packages }}"
+
+- name: Ensure that repositories are uninstalled
+  become: true
+  ansible.builtin.apt_repository:
+    repo: "{{ item }}"
+    update_cache: true
+    state: absent
+  loop: "{{ redis_repositories }}"
+
+- name: Remove apt key
+  ansible.builtin.import_role:
+    name: ansible-role-aptkey
+  vars:
+    aptkey_name: "{{ redis_key_name }}"
+    aptkey_path: "{{ redis_key_path }}"
+    aptkey_uninstall: true

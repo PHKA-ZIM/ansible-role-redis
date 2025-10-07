@@ -1,4 +1,20 @@
 ---
+- name: Add apt key
+  ansible.builtin.import_role:
+    name: ansible-role-aptkey
+  vars:
+    aptkey_url: "{{ redis_key_url }}"
+    aptkey_name: "{{ redis_key_name }}"
+    aptkey_path: "{{ redis_key_path }}"
+
+- name: Ensure that repositories are installed
+  become: true
+  ansible.builtin.apt_repository:
+    repo: "{{ item }}"
+    update_cache: true
+    state: present
+  loop: "{{ redis_repositories }}"
+
 - name: Ensure that packages are installed
   become: true
   ansible.builtin.apt:
