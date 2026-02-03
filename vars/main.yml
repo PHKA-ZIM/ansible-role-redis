@@ -4,7 +4,7 @@ redis_key_path: /etc/apt/keyrings/
 redis_key_name: redis-archive-keyring.asc
 
 redis_repositories:
-  - deb [signed-by={{ redis_key_path }}{{ redis_key_name }}] https://packages.redis.io/deb {{ ansible_distribution_release }} main 
+  - deb [signed-by={{ redis_key_path }}{{ redis_key_name }}] https://packages.redis.io/deb {{ ansible_facts['distribution_release '] }} main 
 
 redis_path: /etc/redis/
 
